@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ContactRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,27 +19,38 @@ class Contact
     private $id;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(min = 3,max = 255,)
      * @ORM\Column(type="string", length=255)
      */
     private $first_name;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(min = 3,max = 255,)
      * @ORM\Column(type="string", length=255)
      */
     private $last_name;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Email
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
+     * @Assert\Sequentially({
+     *    @Assert\Regex("/^[0-9]{9}+$/"),
+     *    @Assert\Length(max=9)
+     *  })
      * @ORM\Column(type="string", length=255,  nullable=true)
      */
     private $phone;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=1000)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $note;
 
@@ -54,7 +66,7 @@ class Contact
 
     public function setFirstName(string $first_name): self
     {
-        $this->first_name = $first_name;
+        $this->first_name = trim($first_name);
 
         return $this;
     }
@@ -66,7 +78,7 @@ class Contact
 
     public function setLastName(string $last_name): self
     {
-        $this->last_name = $last_name;
+        $this->last_name = trim($last_name);
 
         return $this;
     }

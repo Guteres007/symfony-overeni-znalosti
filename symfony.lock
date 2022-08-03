@@ -50,6 +50,12 @@
             "./migrations/.gitignore"
         ]
     },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.8.0"
+    },
+    "php-flasher/flasher-symfony": {
+        "version": "v1.7.0"
+    },
     "phpunit/phpunit": {
         "version": "9.5",
         "recipe": {

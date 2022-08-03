@@ -4,6 +4,11 @@
 
 - potřeba php 7.4.*
 - composer install
-- spust "symfony serve" nebo php buildin server "php -S localhost:8000"
-- vytvoř databázi "blueghost"
-- spustit migrace a seed (doplnit postup)
+- spust "symfony serve" nebo php buildin server pomocí příkazu "php -S localhost:8000"
+- vytvoř databázi "blueghost" a nastav v .env
+
+## Migace a data
+```
+- php bin/console doctrine:migrations:migrate  
+- php bin/console doctrine:fixtures:load
+```

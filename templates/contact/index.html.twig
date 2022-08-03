@@ -6,13 +6,14 @@
     <h1>
         Kontakty
     </h1>
-    {{ form(form) }}
+    {{ include('contact/_form.html.twig') }}
     <table>
         <tr>
             <th>Firtname</th>
             <th>Lastname</th>
             <th>Email</th>
             <th>Phone</th>
+            <th></th>
         </tr>
         {% for contact in contacts %}
             <tr>
@@ -20,7 +21,14 @@
                 <td>{{ contact.lastname }}</td>
                 <td>{{ contact.email }}</td>
                 <td>{{ contact.phone }}</td>
+                <td>
+                    ukazat poznamku
+                    <a href="{{ path('contact_edit', {last_name: contact.lastname}) }}">Edit</a>
+                    <a href="{{ path('contact_remove', {id: contact.id}) }}" onclick="return confirm('Are you sure?')">Remove</a>
+                </td>
             </tr>
         {% endfor %}
     </table>
+
+    {{ knp_pagination_render(contacts) }}
 {% endblock %}
