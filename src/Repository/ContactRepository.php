@@ -24,6 +24,10 @@ class ContactRepository extends ServiceEntityRepository implements ContactReposi
         parent::__construct($registry, Contact::class);
     }
 
+    /**
+     * @param Contact $entity
+     * @param bool $flush
+     */
     public function add(Contact $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
@@ -32,6 +36,10 @@ class ContactRepository extends ServiceEntityRepository implements ContactReposi
         }
     }
 
+    /**
+     * @param Contact $entity
+     * @param bool $flush
+     */
     public function remove(Contact $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
@@ -40,6 +48,10 @@ class ContactRepository extends ServiceEntityRepository implements ContactReposi
         }
     }
 
+    /**
+     * @param Contact $entity
+     * @param bool $flush
+     */
     public function edit(Contact $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
@@ -48,7 +60,12 @@ class ContactRepository extends ServiceEntityRepository implements ContactReposi
         }
     }
 
-    //Pro paginaci
+
+
+    /**
+     * @return QueryBuilder
+     * paginace
+     */
     public function getPaginate(): QueryBuilder
     {
         $qb = $this->createQueryBuilder('c');
