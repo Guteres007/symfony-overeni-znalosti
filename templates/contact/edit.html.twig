@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Kontakty{% endblock %}
+{% block title %}Kontakt {% endblock %}
 
 {% block body %}
     <h1>
-        Kontakt edit
+        Editace kontaktu {{ contact.firstname }} {{ contact.lastname }}
     </h1>
-   {{ include('contact/_form.html.twig') }}
+    <div>
+        <a href="{{ path('contact_index') }}">Zpět</a>
+    </div>
+    <br>
+    {{ include('contact/_form.html.twig') }}
 
 {% endblock %}

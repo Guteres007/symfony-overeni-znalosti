@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Form\ContactType;
 use App\Repository\ContactRepositoryInterface;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Flasher\Prime\FlasherInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -54,8 +56,12 @@ class ContactController extends AbstractController
     /**
      * @Route("/{last_name}", name="contact_edit")
      */
-    public function edit(Contact $contact, Request $request, ContactRepositoryInterface $contactRepository, FlasherInterface $flasher): Response
-    {
+    public function edit(
+        Contact $contact,
+        Request $request,
+        ContactRepositoryInterface $contactRepository,
+        FlasherInterface $flasher
+    ): Response {
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
         // pokud bude form request tak se ověří validace
@@ -68,7 +74,8 @@ class ContactController extends AbstractController
         return $this->render(
             'contact/edit.html.twig',
             [
-                'form' => $form->createView(),
+                'form'    => $form->createView(),
+                'contact' => $contact
             ]
         );
     }
@@ -76,13 +83,17 @@ class ContactController extends AbstractController
     /**
      * @param Contact $contact
      * @param ContactRepositoryInterface $contactRepository
+     * @param FlasherInterface $flasher
      * @return RedirectResponse
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      * @Route("/contact/{id}/remove", name="contact_remove")
      */
-    public function remove(Contact $contact , ContactRepositoryInterface $contactRepository, FlasherInterface $flasher): RedirectResponse
-    {
+    public function remove(
+        Contact $contact,
+        ContactRepositoryInterface $contactRepository,
+        FlasherInterface $flasher
+    ): RedirectResponse {
         $contactRepository->remove($contact);
         $flasher->addSuccess('Smazáno');
         return $this->redirectToRoute('contact_index');

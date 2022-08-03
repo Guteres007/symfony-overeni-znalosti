@@ -22,7 +22,7 @@
                 <td>{{ contact.email }}</td>
                 <td>{{ contact.phone }}</td>
                 <td>
-                    ukazat poznamku
+                    <button onclick="App.modal('{{ contact.note }}')">Poznámka</button>
                     <a href="{{ path('contact_edit', {last_name: contact.lastname}) }}">Edit</a>
                     <a href="{{ path('contact_remove', {id: contact.id}) }}" onclick="return confirm('Are you sure?')">Remove</a>
                 </td>
