@@ -31,7 +31,7 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
         // pokud bude form request tak se ověří validace
         if ($form->isSubmitted() && $form->isValid()) {
-            // uloží se formuláře pomocí repa
+            // uloží se formulář pomocí repa
             $contactRepository->add($form->getData());
             $flasher->addSuccess('Přidáno');
             return $this->redirectToRoute('contact_index');
@@ -66,7 +66,7 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
         // pokud bude form request tak se ověří validace
         if ($form->isSubmitted() && $form->isValid()) {
-            // uloží se formuláře pomocí repa
+            // uloží se formulář pomocí repa
             $contactRepository->edit($form->getData());
             $flasher->addSuccess('Editováno');
             return $this->redirectToRoute('contact_index');

@@ -25,3 +25,7 @@ npm run build
 symfony serve //nebo
 php -S localhost:8000
 ```
+
+# Testing 
+
+otestováno na PHPstan level 3
